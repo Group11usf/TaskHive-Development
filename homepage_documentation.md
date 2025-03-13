@@ -4,37 +4,6 @@ This project is a simple Ruby on Rails application that serves a homepage with a
 
 ---
 
-## File Structure
-
-my_website/
-├── app/
-│ ├── assets/
-│ │ ├── stylesheets/
-│ │ │ └── application.css
-│ │ ├── javascripts/
-│ │ │ └── application.js
-│ │ └── images/
-│ │ └── logo.png
-│ ├── controllers/
-│ │ └── home_controller.rb
-│ └── views/
-│ └── home/
-│ ├── index.html.erb
-│ ├── dashboard.html.erb
-│ ├── calendar.html.erb
-│ └── login.html.erb
-├── config/
-│ └── routes.rb
-├── test/
-│ ├── controllers/
-│ │ └── home_controller_test.rb
-│ └── test_helper.rb
-├── Gemfile
-├── Gemfile.lock
-├── README.md
-└── .gitignore
-
----
 
 ## File Descriptions
 
