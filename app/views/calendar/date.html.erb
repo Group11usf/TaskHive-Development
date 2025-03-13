@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+
 <head>
   <title>TaskHive</title>
   <%= csrf_meta_tags %>
@@ -20,14 +19,13 @@
       <li><%= link_to 'Login', login_path %></li>
     </ul>
   </nav>
+<div class="container">
+<h1>  
+    <%= Date.parse(@date).strftime('%A %B, ') %><%= Date.parse(@date).day.ordinalize %> <%= Date.parse(@date).strftime('%Y') %>
+</h1>
+    <p>This is where all of our task items will be stored for a specific day</li>
+</div>
 
-  <div class="container">
-    <h2>Welcome to TaskHive</h2>
-    <p>This is the home page. You can navigate to the dashboard, calendar, or login page using the links above.</p>
-  </div>
-
-  <footer>
-    <p>&copy; 2025 TaskHive. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+<footer>
+  <p>&copy; 2025 TaskHive. All rights reserved.</p>
+</footer>

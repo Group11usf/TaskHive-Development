@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   get "sessions/new"
-  get "calendar/index"
   get "dashboard/index"
   root "home#index"
-  get "dashboard", to: "dashboard#index"
-  get "calendar", to: "calendar#index"
+  get "/dashboard", to: "dashboard#index"
+  get "/calendar", to: "calendar#index", as: :calendar
   get "login", to: "sessions#new"
+  get "/calendar/date", to: "calendar#date", as: :date
   # get "home/index" not using this rn
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

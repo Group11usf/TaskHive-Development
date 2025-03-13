@@ -74,3 +74,72 @@ body, h1, h2, h3, p, ul, li {
     bottom: 0;
     width: 100%;
   }
+
+  table { 
+    border-collapse: collapse; 
+    width: 100%; 
+    height:110%;
+    border-radius: 70%;
+  }
+
+  td { 
+    border: 1px solid #ccc; 
+    padding: 8px; 
+    text-align:left; 
+    height: 40px;
+  }
+  th { 
+    background-color: #f2f2f2; 
+    border: 1px solid #ccc; 
+    padding: 8px; 
+    text-align: center;
+  }
+  .other-month { 
+    color: #aaa; 
+  }
+
+  .header {
+    text-align: left;
+    padding: 1% 1% 1% 3%;
+    width: 250px;
+  }
+
+  .override {
+    width: auto !important;
+  }
+
+  .calendar_container {
+    padding: 0 3% 3% 3%;
+  }
+
+  .today {
+    font-weight: bolder;
+  }
+
+  #calendar_days:hover {
+    background-color:  #c1c1c1;
+  }
+
+  .no-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .navigation {
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+    align-items: center;
+    width: inherit;
+  }
+
+  .small-icon {
+    width: 30px;
+    height: auto;
+  }
+  .btn .prev {
+    width: 30px;
+    height: auto;
+  }
+
+  
