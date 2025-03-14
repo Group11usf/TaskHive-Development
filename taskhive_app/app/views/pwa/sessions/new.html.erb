@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TaskHive - Login</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <style>
+    /* Center the login box on the screen */
+    .login-container {
+      width: 300px;
+      margin: 100px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      box-shadow: 2px 2px 12px #aaa;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TaskHive</h1> 
+  </header>
+
+  <nav>
+    <ul>
+      <li><%= link_to 'Home', root_path %></li>
+      <li><%= link_to 'Dashboard', dashboard_path %></li>
+      <li><%= link_to 'Calendar', calendar_path %></li>
+      <li><%= link_to 'Login', login_path %></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="login-container">
+      <h2>Log In</h2>
+      <%= form_with(url: login_path, local: true) do |form| %>
+        <div>
+          <%= form.label :username %>
+          <%= form.text_field :username, placeholder: "Enter username" %>
+        </div>
+        <div>
+          <%= form.label :password %>
+          <%= form.password_field :password, placeholder: "Enter password" %>
+        </div>
+        <div>
+          <%= form.submit "Log In" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 TaskHive. All rights reserved.</p>
+  </footer>
+</body>
+</html>
