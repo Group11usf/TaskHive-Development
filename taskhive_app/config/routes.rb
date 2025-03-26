@@ -1,13 +1,20 @@
 Rails.application.routes.draw do
+  get "users/new"
+  get "users/create"
+  resource :session
+  resources :passwords, param: :token
   #get "sessions/new"
   get "dashboard/index"
   root "home#index"
   get "/dashboard", to: "dashboard#index"
   get "/calendar", to: "calendar#index", as: :calendar
   get "/calendar/date", to: "calendar#date", as: :date
-  get 'login', to: 'pwa/sessions#new'
-  post 'login', to: 'pwa/sessions#create'
-  delete 'logout', to: 'pwa/sessions#destroy'
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+  resources :users, only: [:new, :create]
+  get 'createAccount', to: 'users#new', as: :createAccount
+
   resources :tasks, only: [:create]
   get 'calendar/date/:date', to: 'tasks#show', as: 'task_date'
   delete '/clear_tasks', to: 'tasks#clear_all', as: 'clear_tasks'
