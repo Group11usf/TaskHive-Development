@@ -8,6 +8,13 @@ Rails.application.routes.draw do
   get 'login', to: 'pwa/sessions#new'
   post 'login', to: 'pwa/sessions#create'
   delete 'logout', to: 'pwa/sessions#destroy'
+  resources :tasks, only: [:create]
+  get 'calendar/date/:date', to: 'tasks#show', as: 'task_date'
+  delete '/clear_tasks', to: 'tasks#clear_all', as: 'clear_tasks'
+  resources :tasks, only: [:create, :destroy]
+
+
+
   # get "home/index" not using this rn
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

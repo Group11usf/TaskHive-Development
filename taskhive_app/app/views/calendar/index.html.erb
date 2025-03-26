@@ -21,6 +21,7 @@
     </ul>
   </nav>
 
+
 <div class="container">
 <body>
   <% require 'date' %>
@@ -39,6 +40,11 @@
   <%= link_to "Previous Month", calendar_path(year: displayed_date.prev_month.year, month: displayed_date.prev_month.month), class: "btn prev"%>
 
     <%= link_to "Next Month", calendar_path(year: displayed_date.next_month.year, month: displayed_date.next_month.month), class: "btn next" %>
+
+    <%= button_to "Clear All Tasks", clear_tasks_path, method: :delete, 
+    data: { confirm: "Are you sure you want to delete ALL tasks?" }, 
+    class: "btn clear-tasks" %>
+
   </div>
 
   <div class="calendar_container">
@@ -59,7 +65,13 @@
           <tr>
             <% week.each do |day| %>
               <td id="calendar_days" class="<%= 'other-month' if day.month != current_month %> <%= 'today' if day == currentDate %>" >
-                <a class="no-link" href="<%= date_path(date: day.strftime('%Y-%m-%d')) %>"><%= day.day %></a>
+                <%= link_to day.day, task_date_path(date: day.strftime('%Y-%m-%d')), class: 'date-link' %>
+                <% task_count = Task.where(due_date: day).count %>
+                <% if task_count > 0 %>
+                  <div class="task-indicator" title="<%= pluralize(task_count, 'task') %>">
+                    <%= task_count %>
+                  </div>
+                <% end %>
               </td>
             <% end %>
           </tr>
@@ -73,3 +85,13 @@
 <footer>
   <p>&copy; 2025 TaskHive. All rights reserved.</p>
 </footer>
+
+<script>
+document.getElementById("newTaskButton").addEventListener("click", function() {
+    var form = document.getElementById("taskFormContainer");
+    form.style.display = form.style.display === "none" ? "block" : "none";
+});
+document.getElementById("cancelTaskButton").addEventListener("click", function() {
+    document.getElementById("taskFormContainer").style.display = "none";
+});
+</script>
