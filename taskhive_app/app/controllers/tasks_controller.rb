@@ -5,7 +5,7 @@ class TasksController < ApplicationController
     end
   
     def create
-      @task = Task.new(task_params)
+      @task = current_user.tasks.new(task_params)
       if @task.save
         redirect_to task_date_path(date: @task.due_date), notice: "Task created!"
       else
@@ -15,7 +15,7 @@ class TasksController < ApplicationController
   
     def show
       @date = params[:date]
-      @tasks = Task.where(due_date: @date)
+      @tasks = Task.where(due_date: @date, user_id: current_user)
       @task = Task.new
       #render 'tasks/date'
     end
@@ -30,8 +30,6 @@ class TasksController < ApplicationController
         @task.destroy
         redirect_to task_date_path(date: @task.due_date), notice: "Task deleted successfully."
       end
-      
-    private
       
     def task_params
       params.require(:task).permit(:title, :link, :due_date)

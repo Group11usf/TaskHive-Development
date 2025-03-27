@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TaskHive - Login</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <style>
+    /* Center the login box on the screen */
+    .login-container {
+      width: max-content;
+      margin: 100px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      box-shadow: 2px 2px 12px #aaa;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TaskHive</h1> 
+  </header>
+    <nav>
+      <ul>
+          <li><%= link_to 'Login', login_path %></li>
+          <li><%= link_to 'Create Account', createAccount_path  %></li>
+      </ul>
+    </nav>
+
+<div class="container">
+  <div class="login-container">
+
+  <%= tag.div(flash[:alert], id: "flash-alert", style: "color:red") if flash[:alert] %>
+  <%= tag.div(flash[:notice], id: "flash-notice", style: "color:green") if flash[:notice] %>
+
+
+
+    <%= form_with url: session_path do |form| %>
+    <div class="field">
+      <%= form.label :email_address %>
+      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
+     </div>
+     <div class="field">
+      <%= form.label :password %>
+      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 32 %><br>
+      </div>
+      <%= form.submit "Sign in" %>
+    <% end %>
+<br>
+
+<%= link_to "Forgot password?", new_password_path %>
+</div>
+</div>
+
+  <footer>
+    <p>&copy; 2025 TaskHive. All rights reserved.</p>
+  </footer>
+</body>
+</html>
