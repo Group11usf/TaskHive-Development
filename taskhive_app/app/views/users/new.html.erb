@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TaskHive - Create an Account</title>
+  <title>TaskHive - Login</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+  <%= javascript_importmap_tags %>
   <style>
-    /* Center the login box on the screen */
+    /* Center the login form on the screen */
     .login-container {
-      width: max-content;
+      width: 300px;
       margin: 100px auto;
       padding: 20px;
       border: 1px solid #ddd;
@@ -19,55 +19,39 @@
   </style>
 </head>
 <body>
-    <header>
-        <h1>TaskHive</h1> 
-    </header>
-        <nav>
-        <ul>
-            <li><%= link_to 'Login', login_path %></li>
-            <li><%= link_to 'Create Account', createAccount_path %></li>
-        </ul>
-    </nav>
-
-
-
-<div class="container">
-  <div class="login-container">
-        <%= form_with(model: @user, local: true) do |f| %>
-        
-
-
+  <header>
+    <h1>TaskHive</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><%= link_to 'Home', root_path %></li>
+      <li><%= link_to 'Dashboard', dashboard_path %></li>
+      <li><%= link_to 'Calendar', calendar_path %></li>
+      <li><%= link_to 'Login', login_path %></li>
+      <li><%= link_to 'Create Account', createAccount_path %></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <div class="login-container">
+      <h2>Login</h2>
+      <% if flash[:alert] %>
+        <p style="color: red;"><%= flash[:alert] %></p>
+      <% end %>
+      <%= form_with url: login_path, local: true do |form| %>
         <div class="field">
-            <%= f.label :email_address %>
-            <%= f.email_field :email_address %>
+          <%= form.label :email_address, "Email Address" %><br>
+          <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address" %>
         </div>
-
         <div class="field">
-            <%= f.label :password %>
-            <%= f.password_field :password %>
+          <%= form.label :password, "Password" %><br>
+          <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password" %>
         </div>
-
-        <div class="field">
-            <%= f.label :password_confirmation %>
-            <%= f.password_field :password_confirmation %>
-        </div>
-
-        <% if @user.errors.any? %>
-            <div id="error_explanation" style="color:red; padding:5px;">
-            <% @user.errors.full_messages.each do |message| %>
-                <%= message %>
-                <br>
-            <% end %>
-            </div>
-        <% end %>
-
         <div class="actions">
-            <%= f.submit "Create Account" %>
+          <%= form.submit "Log In" %>
         </div>
-        <% end %>
+      <% end %>
     </div>
-</div>
-
+  </div>
   <footer>
     <p>&copy; 2025 TaskHive. All rights reserved.</p>
   </footer>
