@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   resources :tasks, only: [:create, :destroy]
   get 'calendar/date/:date', to: 'tasks#show', as: 'task_date'
   delete '/clear_tasks', to: 'tasks#clear_all', as: 'clear_tasks'
+  # Task editing routes
+  get 'calendar/date/:date/:id', to: 'tasks#edit', as: 'task_edit'
+  patch 'calendar/date/:date/:id', to: 'tasks#update', as: 'task_update'
 
   # Health check
   get "up" => "rails/health#show", as: :rails_health_check

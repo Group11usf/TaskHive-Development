@@ -131,6 +131,7 @@ body, h1, h2, h3, p, ul, li {
     gap: 2%;
     align-items: center;
     width: inherit;
+    padding: 5px;
   }
 
   .small-icon {
@@ -150,7 +151,6 @@ body, h1, h2, h3, p, ul, li {
   }
   
   .task-indicator {
-    background: #4CAF50;
     color: white;
     border-radius: 50%;
     width: 20px;
@@ -159,9 +159,6 @@ body, h1, h2, h3, p, ul, li {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
     cursor: pointer;
     transition: all 0.2s ease;
   }
@@ -169,6 +166,16 @@ body, h1, h2, h3, p, ul, li {
   .task-indicator:hover {
     transform: scale(1.1);
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  }
+
+  .working {
+    background-color: #88aadd;
+  }
+  .completed {
+    background-color: #0c9041;
+  }
+  .not-started {
+    background-color: #b72937;
   }
   
   #calendar_days {
@@ -287,22 +294,20 @@ body, h1, h2, h3, p, ul, li {
 }
 
 .delete-task-btn {
-  background: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: #f74658;
   transition: background 0.2s ease;
 }
 
 .delete-task-btn:hover {
-  background: #bb2d3b;
+  color: #93232e;
+}
+
+.edit-task-btn {
+  color: #5a5a5a;
+}
+
+.edit-task-btn:hover {
+  color: #2d2d2d;
 }
 
 .no-tasks {
@@ -351,5 +356,98 @@ body, h1, h2, h3, p, ul, li {
 
 .submit-btn:hover {
   background: #0b5ed7;
+}
+
+.form-select {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #333;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-select:hover {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(108, 108, 108, 0.5);
+}
+
+.custom-button {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  background: none;
+  padding:4px;
+}
+
+.custom-button:hover {
+  transform: scale(1.06);
+}
+
+.finished {
+  text-decoration: line-through;
+}
+
+.clear-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 1px;
+  right: 5px;
+  height: inherit;
+  width: 40px;
+  gap: 0.2rem;
+  padding: 2px;
+}
+
+
+.task-legend {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  width: max-content;
+}
+
+.legend-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 4px;
+  z-index: 100;
+}
+
+.task-legend.show-tooltip .legend-content {
+  display: block;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.legend-item:last-child {
+  margin-bottom: 0;
+}
+
+.legend-label {
+  padding: 0 0 0 5px;
+}
+
+#taskLegendHeader {
+  padding: 0 33px 0 0;
 }
   
