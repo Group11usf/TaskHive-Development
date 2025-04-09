@@ -1,0 +1,28 @@
+<div class="dashboard-container">
+  <h1 class="dashboard-title">Your Upcoming Tasks</h1>
+  
+  <% if @tasks.any? %>
+    <div class="tasks-list">
+      <% @tasks.each do |task| %>
+        <div class="task-card task-<%= task.task_status.parameterize %>">
+          <div class="task-header">
+            <h3><%= link_to task.title, calendar_date_path(task.due_date.to_fs(:db)), class: "task-link" %></h3>
+            <span class="task-status <%= task.task_status.parameterize %>">
+              <%= task.task_status %>
+            </span>
+          </div>
+          <div class="task-due">
+            <% if task.due_date.to_date == Date.today %>
+              Due Today
+            <% else %>
+              Due <%= distance_of_time_in_words(Date.today, task.due_date) %> from now
+            <% end %>
+            <span class="due-date">(<%= task.due_date.strftime("%b %d, %Y") %>)</span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="no-tasks">No active tasks this week! 🎉</p>
+  <% end %>
+</div>
