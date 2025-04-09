@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root "home#index"
 
-  get "/dashboard", to: "dashboard#index"
   get "/calendar", to: "calendar#index", as: :calendar
   get "/calendar/date", to: "calendar#date", as: :date
 
@@ -24,6 +23,10 @@ Rails.application.routes.draw do
   # Task editing routes
   get 'calendar/date/:date/:id', to: 'tasks#edit', as: 'task_edit'
   patch 'calendar/date/:date/:id', to: 'tasks#update', as: 'task_update'
+
+  # Dashboard routes
+  get '/dashboard', to: 'dashboard#show', as: :dashboard
+  get '/calendar/date/:date', to: 'calendar#show_date', as: :calendar_date
 
   # Health check
   get "up" => "rails/health#show", as: :rails_health_check

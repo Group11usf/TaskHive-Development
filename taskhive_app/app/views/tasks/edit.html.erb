@@ -14,7 +14,7 @@
          <%= f.label :task_status, "Task Status" %>
          <%= f.select :task_status, 
              ['Not Started', 'Working', 'Completed'],
-             { prompt: "Select task status" },
+             { selected: @task.task_status || 'Not Started' },
              { class: "form-select"}
          %>
        </div>
