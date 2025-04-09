@@ -1,75 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>TaskHive - Create an Account</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <style>
-    /* Center the login box on the screen */
-    .login-container {
-      width: max-content;
-      margin: 100px auto;
-      padding: 20px;
-      border: 1px solid #ddd;
-      box-shadow: 2px 2px 12px #aaa;
-      background: #fff;
-    }
-  </style>
-</head>
-<body>
-    <header>
-        <h1>TaskHive</h1> 
-    </header>
-        <nav>
-        <ul>
-            <li><%= link_to 'Login', login_path %></li>
-            <li><%= link_to 'Create Account', createAccount_path %></li>
-        </ul>
-    </nav>
-
-
-
-<div class="container">
-  <div class="login-container">
-        <%= form_with(model: @user, local: true) do |f| %>
-        
-
-
-        <div class="field">
-            <%= f.label :email_address %>
-            <%= f.email_field :email_address %>
-        </div>
-
-        <div class="field">
-            <%= f.label :password %>
-            <%= f.password_field :password %>
-        </div>
-
-        <div class="field">
-            <%= f.label :password_confirmation %>
-            <%= f.password_field :password_confirmation %>
-        </div>
-
-        <% if @user.errors.any? %>
-            <div id="error_explanation" style="color:red; padding:5px;">
-            <% @user.errors.full_messages.each do |message| %>
-                <%= message %>
-                <br>
-            <% end %>
-            </div>
-        <% end %>
-
-        <div class="actions">
-            <%= f.submit "Create Account" %>
-        </div>
-        <% end %>
-    </div>
-</div>
-
-  <footer>
-    <p>&copy; 2025 TaskHive. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+<h2>Create Account</h2>
+<% if @user.errors.any? %>
+  <div style="color: red;">
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<%= form_with model: @user, local: true do |f| %>
+  <div>
+    <%= f.label :email_address, "Email Address" %><br>
+    <%= f.text_field :email_address, required: true, placeholder: "Enter your email" %>
+  </div>
+  <div>
+    <%= f.label :password, "Password" %><br>
+    <%= f.password_field :password, required: true, placeholder: "Enter your password" %>
+  </div>
+  <div>
+    <%= f.label :password_confirmation, "Confirm Password" %><br>
+    <%= f.password_field :password_confirmation, required: true, placeholder: "Confirm your password" %>
+  </div>
+  <div>
+    <%= f.submit "Register" %>
+  </div>
+<% end %>
