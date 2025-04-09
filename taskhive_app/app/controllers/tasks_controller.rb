@@ -42,8 +42,8 @@ class TasksController < ApplicationController
     end
 
     def clear_all
-        Task.destroy_all
-        redirect_to calendar_path, notice: "All tasks have been cleared."
+        current_user.tasks.destroy_all
+        redirect_to calendar_path, notice: "All your tasks have been cleared."
     end
       
     def destroy
