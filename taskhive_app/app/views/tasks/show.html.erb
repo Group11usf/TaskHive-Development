@@ -38,7 +38,9 @@
         <% @tasks.each do |task| %>
           <div class="task-card">
             <div class="task-content">
-              <h3 class="task-title"><%= task.title %></h3>
+              <h3 class="task-title <%= 'finished' if task.date_finished.present? %>">
+                <%= task.title %> - <%= task.task_status %>
+              </h3>
               <% if task.link.present? %>
                 <p class="task-link">
                   <%= link_to task.link, 
@@ -49,11 +51,17 @@
               <% end %>
             </div>
             <div class="task-actions">
+              <%# fix this to go to th eright path hoorah %>
+              <%= button_to task_edit_path(task.due_date, task.id), 
+                    title: "Edit Task", 
+                    method: :get, 
+                    class: "fa fa-pencil fa-2x custom-button edit-task-btn" do %>
+              <% end %>
               <%= button_to task_path(task), method: :delete, 
-                    class: "delete-task-btn",
+                    class: "fa fa-trash-o fa-2x custom-button delete-task-btn",
                     data: { confirm: "Delete this task?" },
                     title: "Delete task" do %>
-                ×
+                
               <% end %>
             </div>
           </div>
@@ -73,7 +81,16 @@
         <%= f.label :title, "Task Title" %>
         <%= f.text_field :title, placeholder: "Enter task title", required: true %>
       </div>
-      
+
+      <div class="form-field">
+        <%= f.label :task_status, "Task Status" %>
+        <%= f.select :task_status, 
+            ['Not Started', 'Working', 'Completed'],
+            { prompt: "Select task status" },
+            { class: "form-select"}
+        %>
+      </div>
+
       <div class="form-field">
         <%= f.label :link, "Task Link (optional)" %>
         <%= f.text_field :link, placeholder: "https://example.com" %>

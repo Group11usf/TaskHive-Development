@@ -1,0 +1,54 @@
+<head>
+  <title>TaskHive</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <header>
+    <h1>TaskHive</h1> 
+  </header>
+    <nav>
+      <ul>
+        <% if authenticated? %>
+          <li><%= link_to 'Home', root_path %></li>
+          <li><%= link_to 'Dashboard', dashboard_path %></li>
+          <li><%= link_to 'Calendar', calendar_path %></li>
+          <li><%= link_to 'Log Out', login_path,  method: :delete if authenticated? %></li>
+          <% end %>
+      </ul>
+    </nav>
+
+<div class="container">
+  <%= link_to '← Back to Calendar', calendar_path, class: 'back-link' %>
+
+
+
+    <div class="add-task-section">
+    <h2>Update Task</h2>
+    <%= form_with model: @task, url: task_update_path(@task.due_date, @task.id), data: { turbo: false } do |f| %>
+      <%= f.hidden_field :due_date, value: @date %>
+
+      <div class="form-field">
+        <%= f.label :title, "Task Title" %>
+        <%= f.text_field :title, placeholder: "Enter task title", required: true %>
+      </div>
+
+      <div class="form-field">
+        <%= f.label :task_status, "Task Status" %>
+        <%= f.select :task_status, 
+            ['Not Started', 'Working', 'Completed'],
+            { prompt: "Select task status" },
+            { class: "form-select"}
+        %>
+      </div>
+
+      <div class="form-field">
+        <%= f.label :link, "Task Link (optional)" %>
+        <%= f.text_field :link, placeholder: "https://example.com" %>
+      </div>
+      
+      <%= f.submit "Update Task", class: "submit-btn" %>
+    <% end %>
+  </div>

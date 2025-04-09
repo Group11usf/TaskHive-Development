@@ -12,7 +12,25 @@ class TasksController < ApplicationController
         render :new
       end
     end
+
+    def edit
+      @task = Task.find(params[:id])
+      @date = @task.due_date
+    end
   
+    def update
+      @task = Task.find(params[:id])
+      @date = @task.due_date
+      if @task.update(task_params)
+        if @task.task_status == "Completed"
+          @task.update(date_finished: Time.current)
+        end
+        redirect_to task_date_path(date: @task.due_date), notice: "Task updated!"
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
+
     def show
       @date = params[:date]
       @tasks = Task.where(due_date: @date, user_id: current_user)
@@ -21,17 +39,17 @@ class TasksController < ApplicationController
     end
 
     def clear_all
-        Task.destroy_all
+        @tasks = Task.where(user_id: current_user).destroy_all
         redirect_to calendar_path, notice: "All tasks have been cleared."
-      end
+    end
       
     def destroy
         @task = Task.find(params[:id])
         @task.destroy
         redirect_to task_date_path(date: @task.due_date), notice: "Task deleted successfully."
-      end
+    end
       
     def task_params
-      params.require(:task).permit(:title, :link, :due_date)
+      params.require(:task).permit(:title, :link, :due_date, :task_status)
     end
-  end
+end
