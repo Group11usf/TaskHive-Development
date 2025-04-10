@@ -1,73 +1,68 @@
-<div class="container">
+<div class="navigation">
+  <h1 class="header"><%= @displayed_date ? @displayed_date.strftime("%B %Y") : "Calendar" %></h2>
+  <%= link_to "Previous Month", calendar_path(year: @displayed_date.prev_month.year, month: @displayed_date.prev_month.month), class: "btn prev" %>
+  <%= link_to "Next Month", calendar_path(year: @displayed_date.next_month.year, month: @displayed_date.next_month.month), class: "btn next" %>
+  <%= button_to "Clear All Tasks", clear_tasks_path, method: :delete, data: { confirm: "Are you sure you want to delete ALL tasks?" }, class: "btn clear-tasks" %>
 
-  <div class="navigation">
-    <h1 class="header"><%= @displayed_date ? @displayed_date.strftime("%B %Y") : "Calendar" %></h2>
-    <%= link_to "Previous Month", calendar_path(year: @displayed_date.prev_month.year, month: @displayed_date.prev_month.month), class: "btn prev" %>
-    <%= link_to "Next Month", calendar_path(year: @displayed_date.next_month.year, month: @displayed_date.next_month.month), class: "btn next" %>
-    <%= button_to "Clear All Tasks", clear_tasks_path, method: :delete, data: { confirm: "Are you sure you want to delete ALL tasks?" }, class: "btn clear-tasks" %>
-
-    <div class="task-legend" id="taskLegend">
-        <h2 class="header override" id="taskLegendHeader">
-          <i class="fa fa-navicon fa-lg"></i>
-        </h2>
-        <div class="legend-content">
-          <% ['Completed', 'Working', 'Not Started'].each do |status| %>
-            <div class="legend-item">
-              <div class="task-indicator <%= status.downcase.gsub(" ", "-") %>"></div>
-              <span class="legend-label"><%= status %></span>
-            </div>
-          <% end %>
+  <div class="task-legend" id="taskLegend">
+    <h2 class="header override" id="taskLegendHeader">
+      <i class="fa fa-navicon fa-lg"></i>
+    </h2>
+    <div class="legend-content">
+      <% ['Completed', 'Working', 'Not Started'].each do |status| %>
+          <div class="legend-item">
+          <div class="task-indicator <%= status.downcase.gsub(" ", "-") %>"></div>
+          <span class="legend-label"><%= status %></span>
         </div>
-      </div>
-  </div>
-
-  <div class="calendar_container">
-    <table>
-      <thead>
-        <tr>
-          <th>Sun</th>
-          <th>Mon</th>
-          <th>Tue</th>
-          <th>Wed</th>
-          <th>Thu</th>
-          <th>Fri</th>
-          <th>Sat</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% (@start_day..@end_day).to_a.each_slice(7) do |week| %>
-          <tr>
-            <% week.each do |day| %>
-              <td id="calendar_days" class="<%= 'other-month' if day.month != @displayed_date.month %> <%= 'today' if day == Date.today %>">
-                <%= link_to day.day, task_date_path(date: day.strftime('%Y-%m-%d')), class: 'date-link' %>
-                <% total_tasks = Task.where(due_date: day, user_id: current_user).count %>
-                <% if total_tasks > 0 %>
-                  <div class="clear-container">
-                    <% ['Completed', 'Working', 'Not Started'].each do |status| %>
-                    <% task_count = Task.where(due_date: day, user_id: current_user, task_status: status).count %>
-                      <% if task_count > 0 %>
-                        <div class="task-indicator <%= status.downcase.gsub(" ", "-") %>" title="<%= pluralize(task_count, 'task') %>">
-                          <%= task_count %>
-                        </div>
-                      <% end %>
-                    <% end %>
-                  </div>
-                <% end %>
-              </td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+      <% end %>
+    </div>
   </div>
 </div>
 
+<div class="calendar_container">
+  <table>
+    <thead>
+      <tr>
+        <th>Sun</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% (@start_day..@end_day).to_a.each_slice(7) do |week| %>
+        <tr>
+          <% week.each do |day| %>
+            <td id="calendar_days" class="<%= 'other-month' if day.month != @displayed_date.month %> <%= 'today' if day == Date.today %>">
+              <%= link_to day.day, task_date_path(date: day.strftime('%Y-%m-%d')), class: 'date-link' %>
+              <% total_tasks = Task.where(due_date: day, user_id: current_user).count %>
+              <% if total_tasks > 0 %>
+                <div class="clear-container">
+                  <% ['Completed', 'Working', 'Not Started'].each do |status| %>
+                    <% task_count = Task.where(due_date: day, user_id: current_user, task_status: status).count %>
+                    <% if task_count > 0 %>
+                      <div class="task-indicator <%= status.downcase.gsub(" ", "-") %>" title="<%= pluralize(task_count, 'task') %>">
+                      <%= task_count %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-     var taskLegend = document.getElementById("taskLegend");
-     taskLegend.addEventListener("click", function(e) {
-       // Toggle a class that controls the display of the tooltip
-       this.classList.toggle("show-tooltip");
-     });
-   });
+  var taskLegend = document.getElementById("taskLegend");
+  taskLegend.addEventListener("click", function(e) {
+  // Toggle a class that controls the display of the tooltip
+    this.classList.toggle("show-tooltip");
+});
 </script>

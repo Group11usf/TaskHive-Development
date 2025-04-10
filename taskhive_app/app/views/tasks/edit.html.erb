@@ -1,5 +1,4 @@
-<div class="container">
-   <%= link_to '← Back to Calendar', calendar_path, class: 'back-link' %>
+<%= link_to '← Back to Calendar', calendar_path, class: 'back-link' %>
     <div class="add-task-section">
       <h2>Update Task</h2>
         <%= form_with model: @task, url: task_update_path(@task.due_date, @task.id), data: { turbo: false } do |f| %>
@@ -25,6 +24,5 @@
        </div>
        
        <%= f.submit "Update Task", class: "submit-btn" %>
-     <% end %>
-   </div>
+    <% end %>
 </div>
