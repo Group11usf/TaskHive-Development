@@ -1,18 +1,22 @@
-<h2>Login</h2>
+<div class="login-container">
+<h2 class="login-header">Login</h2>
 <% if flash[:alert] %>
   <p style="color:red;"><%= flash[:alert] %></p>
 <% end %>
+<div class="login-items">
 <%= form_with url: login_path, local: true do |form| %>
   <div>
-    <%= form.label :email_address, "Email Address" %><br>
-    <%= form.email_field :email_address, required: true, autofocus: true, placeholder: "Enter your email address" %>
+    <%= form.label :email_address, "Email Address", class: "form-label" %><br>
+    <%= form.email_field :email_address, required: true, autofocus: true, placeholder: "Enter your email address", class: "custom-textbox login-form" %>
   </div>
   <div>
-    <%= form.label :password, "Password" %><br>
-    <%= form.password_field :password, required: true, placeholder: "Enter your password" %>
+    <%= form.label :password, "Password", class: "form-label" %><br>
+    <%= form.password_field :password, required: true, placeholder: "Enter your password", class: "custom-textbox login-form" %>
   </div>
   <div>
-    <%= form.submit "Login" %>
+    <%= form.submit "Login", class: "custom-button submit" %>
   </div>
 <% end %>
-<p><%= link_to "Forgot password?", new_password_path %></p>
+<%= button_to "Forgot password?", new_password_path, class: "custom-button forgot-pass", method: :get %>
+</div>
+</div>

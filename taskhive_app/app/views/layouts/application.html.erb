@@ -6,24 +6,33 @@
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/solid.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/regular.min.css">
   <%= javascript_importmap_tags %>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-    <h1>TaskHive</h1>
+    <div class="ano-nav">
+      <h1>TaskHive</h1>
+      <%= render 'layouts/navbar' %>
+    </div>
     <!-- Render the unified, dynamic navigation bar at the top -->
-    <%= render 'layouts/navbar' %>
   </header>
 
   <!-- Main page content; individual view files should include only page-specific content -->
   <div class="main-content">
-    <div class="container">
+    <div class="<%= hide_container? ? '' : 'container' %>">
       <%= yield %>
     </div>
   </div>
 
   <footer>
-    <p>&copy; 2025 TaskHive. All rights reserved.</p>
+    <p style="font-family: 'DM Serif Display', serif !important;">&copy; 2025 TaskHive. All rights reserved.</p>
   </footer>
 </body>
 </html>
