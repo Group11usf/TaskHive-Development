@@ -1,27 +1,23 @@
-<h2>Create Account</h2>
-<% if @user.errors.any? %>
-  <div style="color: red;">
-    <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
+<div class="login-container">
+<h2 class="login-header">Create Account</h2>
+<% if flash[:alert] %>
+  <p style="color:red;"><%= flash[:alert] %></p>
 <% end %>
 <%= form_with model: @user, local: true do |f| %>
   <div>
-    <%= f.label :email_address, "Email Address" %><br>
-    <%= f.text_field :email_address, required: true, placeholder: "Enter your email" %>
+    <%= f.label :email_address, "Email Address",class: "form-label" %><br>
+    <%= f.text_field :email_address, required: true, placeholder: "Enter your email", class: "custom-textbox login-form" %>
   </div>
   <div>
-    <%= f.label :password, "Password" %><br>
-    <%= f.password_field :password, required: true, placeholder: "Enter your password" %>
+    <%= f.label :password, "Password", class: "form-label" %><br>
+    <%= f.password_field :password, required: true, placeholder: "Enter your password", class: "custom-textbox login-form" %>
   </div>
   <div>
-    <%= f.label :password_confirmation, "Confirm Password" %><br>
-    <%= f.password_field :password_confirmation, required: true, placeholder: "Confirm your password" %>
+    <%= f.label :password_confirmation, "Confirm Password", class: "form-label" %><br>
+    <%= f.password_field :password_confirmation, required: true, placeholder: "Confirm your password", class: "custom-textbox login-form" %>
   </div>
   <div>
-    <%= f.submit "Register" %>
+    <%= f.submit "Register", class: "custom-button submit" %>
   </div>
 <% end %>
+</div>

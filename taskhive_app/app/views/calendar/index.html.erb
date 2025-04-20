@@ -2,7 +2,7 @@
   <h1 class="header"><%= @displayed_date ? @displayed_date.strftime("%B %Y") : "Calendar" %></h2>
   <%= link_to "Previous Month", calendar_path(year: @displayed_date.prev_month.year, month: @displayed_date.prev_month.month), class: "btn prev" %>
   <%= link_to "Next Month", calendar_path(year: @displayed_date.next_month.year, month: @displayed_date.next_month.month), class: "btn next" %>
-  <%= button_to "Clear All Tasks", clear_tasks_path, method: :delete, data: { confirm: "Are you sure you want to delete ALL tasks?" }, class: "btn clear-tasks" %>
+  <%= button_to "Clear All Tasks", clear_tasks_path, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete ALL tasks?" }, class: "btn clear-tasks" %>
 
   <div class="task-legend" id="taskLegend">
     <h2 class="header override" id="taskLegendHeader">
