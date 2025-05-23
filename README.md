@@ -16,7 +16,7 @@
    - Bundler (`gem install bundler`)
 2. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/TaskHive.git
+   git clone https://github.com/Group11usf/TaskHive-Development.git
    cd TaskHive
    ```
 3. **Install dependencies**
